@@ -1,0 +1,76 @@
+program bothPositiveFunction;
+#include( "stdlib.hhf" );
+static
+iValue1 : int32 := 0;
+iValue2 : int32 := 0;
+
+
+
+procedure bothPositive( i: int32; j : int32 ); @nodisplay; @noframe;
+
+static
+iReturnAddress : dword;
+iRegisterValue : dword;
+begin bothPositive;
+
+// entry sequence
+// preserve registers --- EBX place on stack after pops
+mov( EBX, iRegisterValue );
+// acquire parameters on the stack
+pop( iReturnAddress );
+pop( j); 
+pop( i ); 
+
+// push back the return address
+push( iReturnAddress );
+// preserve registers --- EBX
+push( iRegisterValue );
+
+// perform subtask
+cmp(j,0); 
+jle ReturnFalse; 
+
+cmp(i,0); 
+jle ReturnFalse; 
+jmp ReturnTrue; 
+
+
+
+
+ReturnTrue:
+		mov( 1, EAX );			//return true
+		jmp ExitSequence;
+
+
+ReturnFalse:
+		mov( 0, EAX );			//return false
+		jmp ExitSequence;
+
+
+
+ExitSequence:
+// exit sequence
+
+pop( EBX );
+
+ret();
+end bothPositive;
+
+begin bothPositiveFunction;
+stdout.put( "Feed Me i: " );
+stdin.get( iValue1 );
+stdout.put( "Feed Me j: " );
+stdin.get( iValue2 );
+
+stdout.put( "calling bothPositive", nl );
+
+push(iValue1);
+push(iValue2);
+ 
+call bothPositive; // calling bothPositive( iValue1, iValue2);
+stdout.put( "bothPositive returning with EAX = ");
+stdout.puti32( EAX );
+stdout.newln();
+end bothPositiveFunction;
+
+

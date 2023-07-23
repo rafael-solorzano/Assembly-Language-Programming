@@ -1,0 +1,129 @@
+
+program decimalToBinary;
+#include( "stdlib.hhf" );
+static
+iDecimalValue : int8 := 0; // the value to inspect
+begin decimalToBinary;
+
+// Prompt the user
+stdout.put( nl, "Gimme a starting value: " );
+stdin.get(iDecimalValue);
+
+stdout.put("Rolling Table", nl);
+
+// get the value into the register BL
+mov(iDecimalValue, BL); 
+
+
+// ROW 1 
+stdout.put(iDecimalValue, ": "); 
+// rotate right BL 
+ror( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(" ");   
+
+// Repeat logic
+rol( 2, BL ); 
+stdout.puti8(BL);
+stdout.put(" "); 
+
+// Repeat logic
+ror( 3, BL ); 
+stdout.puti8(BL);
+stdout.put(" ");
+
+// Repeat logic
+rol( 4, BL ); 
+stdout.puti8(BL);
+stdout.put(nl);
+
+// ROW 2
+mov(iDecimalValue, BL); // copy staring input value again 
+mov(iDecimalValue, CL);  // separate registry for using with arithmetic shifts 
+add(1, BL);  
+add(1, CL); 
+stdout.puti8(BL);
+stdout.put(": "); 
+
+// rotate right CL, so use seprate registry 
+sar( 1, CL ); 
+stdout.puti8(CL);
+stdout.put(" ");   
+
+// no arithmetic shift, so stick with BL 
+rol( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(" "); 
+
+// Repeat logic
+ror( 1, CL ); 
+stdout.puti8(CL);
+stdout.put(" ");
+
+// Repeat logic
+rol( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(nl);
+
+// ROW 3
+mov(iDecimalValue, BL); // copy staring input value again 
+mov(iDecimalValue, CL);  // seperate registry for using with arithmetic shifts 
+add(2, BL);  
+add(2, CL); 
+stdout.puti8(BL);
+stdout.put(": "); 
+
+// rotate right BL 
+ror( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(" ");   
+
+// Repeat logic
+rol( 2, BL ); 
+stdout.puti8(BL);
+stdout.put(" "); 
+
+// Repeat logic
+sar( 2, CL );     // arithmetic shift so use separate registry 
+stdout.puti8(CL);
+stdout.put(" ");
+
+// Repeat logic
+rol( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(nl);
+
+
+// ROW 4
+mov(iDecimalValue, BL); // copy staring input value again 
+mov(iDecimalValue, CL);  // for using with arithmetic shifts 
+add(3, BL);  
+add(3, CL); 
+stdout.puti8(BL);
+stdout.put(": "); 
+
+// rotate right CL 
+sar( 1, CL );        // arithmetic shift so use separate registry 
+stdout.puti8(CL);
+stdout.put(" ");   
+
+// Repeat logic
+rol( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(" "); 
+
+// Repeat logic
+sar( 1, CL );     // pick up where you left off in separate registry 
+stdout.puti8(CL);
+stdout.put(" ");
+
+// Repeat logic
+rol( 1, BL ); 
+stdout.puti8(BL);
+stdout.put(nl);
+
+
+
+stdout.put(nl); 
+
+end decimalToBinary; 

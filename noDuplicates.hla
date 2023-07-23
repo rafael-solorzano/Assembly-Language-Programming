@@ -1,0 +1,88 @@
+program noDuplicatesFunction;
+#include( "stdlib.hhf" );
+static
+iValue1 : int16 := 0;
+iValue2 : int16 := 0;
+iValue3 : int16 := 0; 
+iFiller : int16 := 0; 
+
+
+
+procedure noDuplicates( x: int16; y : int16; z: int16 ); @nodisplay; @noframe;
+
+static
+iReturnAddress : dword;
+iRegisterValue : dword;
+iJunk : int16; 
+begin noDuplicates;
+
+// entry sequence
+// preserve registers --- EBX place on stack after pops
+mov( EBX, iRegisterValue );
+// acquire parameters on the stack
+pop( iReturnAddress );
+pop(iJunk); 
+pop(z); 
+pop( y); 
+pop( x ); 
+
+// push back the return address
+push( iReturnAddress );
+// preserve registers --- EBX
+push( iRegisterValue );
+
+// perform subtask
+mov(y, DX); 
+cmp(x,DX); 
+je ReturnFalse; 
+
+mov(z, DX); 
+cmp(x,DX); 
+je ReturnFalse; 
+ 
+mov(z, DX); 
+cmp(y,DX); 
+je ReturnFalse; 
+
+jmp ReturnTrue; 
+
+
+ReturnTrue:
+		mov( 1, AL );			//return true
+		jmp ExitSequence;
+
+
+ReturnFalse:
+		mov( 0, AL );			//return false
+		jmp ExitSequence;
+
+
+
+ExitSequence:
+// exit sequence
+
+pop( EBX );
+
+ret();
+end noDuplicates;
+
+begin noDuplicatesFunction;
+stdout.put( "Feed Me x: " );
+stdin.get( iValue1 );
+stdout.put( "Feed Me y: " );
+stdin.get( iValue2 );
+stdout.put( "Feed Me z: " );
+stdin.get( iValue3 );
+
+stdout.put( "calling noDuplicates", nl );
+
+push(iValue1);
+push(iValue2);
+push(iValue3); 
+push(iFiller);  // "junk" to to push even multiple of 32-bits onto the stack 
+ 
+call noDuplicates; 
+stdout.put( "noDuplicates returning with AL = ");
+stdout.puti8( AL );
+stdout.newln();
+end noDuplicatesFunction;

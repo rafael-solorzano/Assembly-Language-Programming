@@ -1,0 +1,77 @@
+
+program decimalToBinary;
+#include( "stdlib.hhf" );
+static
+iDecimalValue : int8 := 0; // the value to inspect
+begin decimalToBinary;
+
+// Prompt the user
+stdout.put( nl, "Gimme a decimal value to print: " );
+stdin.get(iDecimalValue);
+
+stdout.put(iDecimalValue, " is ");
+
+// get the value into the register EBX 
+mov(iDecimalValue, CL);
+
+// rotate left CL -- H.O. bit gets tossed to the carry bit
+rol( 1, CL );
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH ); 
+// whatever is in the carry bit, output as decimal 
+stdout.puti8(AH);  
+
+
+// Repeat logic to count a second bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+
+
+// Repeat logic to count a third bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+
+// Repeat logic to count a fourth bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+stdout.put("_"); 
+
+
+// Repeat logic to count a fifth bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+
+
+// Repeat logic to count a sixth bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+
+
+// Repeat logic to count a seventh bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+
+
+// Repeat logic one last time to count an eighth bit
+rol( 1, CL );
+lahf();
+and( %0000_0001, AH );
+stdout.puti8(AH); 
+
+stdout.put(nl); 
+
+end decimalToBinary; 

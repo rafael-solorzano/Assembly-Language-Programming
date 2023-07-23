@@ -1,0 +1,132 @@
+program dollarValueMenu;
+#include( "stdlib.hhf" );
+ static
+   total : int16 := 0;
+   I : int16 := 0; // for loop counter
+  
+
+
+begin dollarValueMenu; 
+
+	stdout.put("Feed me your order as 4 hex digits:");
+	stdin.get(ax);  
+	mov(total,DI); // copy storage var 'total' into 16 bit sapce 
+	
+	
+	
+	// $1 item 
+	
+	ForLp:
+	InitializeForLp: 
+	mov( 0, I );   // initialize for loop counter 
+	mov(1, dx);   // $1 item 
+	mov(ax, cx); // copy input value to CX to manipualte if needed
+	and( %0000_0000_0000_0111, cx );  // mask all except bits 0-3 which we can later convert to decimal
+	ForLpTerminationTest: // if I < bits 0-3 -->  then terminate for loop 
+	cmp( I, cx );
+	jnl ForLpDone;
+	ForLpBody: 
+	add(dx, total);  // add $1 item to total throughout for loop 
+	ForLpIncrement:
+	inc( I );
+	jmp ForLpTerminationTest;
+	ForLpDone:
+	
+	stdout.put(I, " $1 item", nl); 
+	
+	
+	// $2 item 
+	
+	ForLp2:
+	InitializeForLp2: 
+	mov( 0, I );   // initialize for loop counter 
+	mov(2, dx);   // $2 item  
+	mov(ax, cx); // copy input value to CX to manipualte if needed
+	and( %0000_0000_0011_1000, cx );  // mask all except bits 0-3 which we can later convert to decimal 
+	shr(3, cx); 
+	ForLpTerminationTest2: // if I < bits 0-3 -->  then terminate for loop 
+	cmp( I, cx );
+	jnl ForLpDone2;
+	ForLpBody2: 
+	add(dx, total);  // add $2 item to total throughout for loop 
+	ForLpIncrement2:
+	inc( I );
+	jmp ForLpTerminationTest2;
+	ForLpDone2:
+	
+	stdout.put(I, " $2 item", nl); 
+	
+	
+	// $3 item 
+	
+	ForLp3:
+	InitializeForLp3: 
+	mov( 0, I );   // initialize for loop counter 
+	mov(3, dx);   // $3 item  
+	mov(ax, cx); // copy input value to CX to manipualte if needed
+	and( %0000_0001_1100_0000, cx );  // mask all except bits 0-3 which we can later convert to decimal 
+	shr(6, cx); 
+	ForLpTerminationTest3: // if I < bits 0-3 -->  then terminate for loop 
+	cmp( I, cx );
+	jnl ForLpDone3;
+	ForLpBody3: 
+	add(dx, total);  // add $2 item to total throughout for loop 
+	ForLpIncrement3:
+	inc( I );
+	jmp ForLpTerminationTest3;
+	ForLpDone3:
+	
+	stdout.put(I, " $3 item", nl); 
+	
+	// $4 item 
+	
+	ForLp4:
+	InitializeForLp4: 
+	mov( 0, I );   // initialize for loop counter 
+	mov(4, dx);   // $4 item  
+	mov(ax, cx); // copy input value to CX to manipualte if needed
+	and( %0000_1110_0000_0000, cx );  // mask all except bits 0-3 which we can later convert to decimal 
+	shr(9, cx); 
+	ForLpTerminationTest4: // if I < bits 0-3 -->  then terminate for loop 
+	cmp( I, cx );
+	jnl ForLpDone4;
+	ForLpBody4: 
+	add(dx, total);  // add $2 item to total throughout for loop 
+	ForLpIncrement4:
+	inc( I );
+	jmp ForLpTerminationTest4;
+	ForLpDone4:
+	
+	stdout.put(I, " $4 item", nl); 
+	
+	// $5 item 
+	
+	ForLp5:
+	InitializeForLp5: 
+	mov( 0, I );   // initialize for loop counter 
+	mov(5, dx);   // $5 item  
+	mov(ax, cx); // copy input value to CX to manipualte if needed
+	and( %0111_0000_0000_0000, cx );  // mask all except bits 0-3 which we can later convert to decimal 
+	shr(12, cx); 
+	ForLpTerminationTest5: // if I < bits 0-3 -->  then terminate for loop 
+	cmp( I, cx );
+	jnl ForLpDone5;
+	ForLpBody5: 
+	add(dx, total);  // add $2 item to total throughout for loop 
+	ForLpIncrement5:
+	inc( I );
+	jmp ForLpTerminationTest5;
+	ForLpDone5:
+	
+	stdout.put(I, " $5 item", nl); 
+	
+	
+	stdout.put("Total Order Costs: $", total); 
+	
+	
+	
+	
+	
+
+
+end dollarValueMenu; 

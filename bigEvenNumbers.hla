@@ -1,0 +1,68 @@
+program BigEvenNumbers;
+#include("stdlib.hhf")
+
+static
+    n: int8;  // User input
+	I: int8;  // counter for for loop to iterate n times 
+	J: int8;  // counter to decrement by 2 each iteration
+	Y: int8; 
+	
+
+	
+
+
+begin BigEvenNumbers;
+	stdout.newln();	
+	
+    stdout.put("Gimme a decimal value to use for n: ");
+    stdin.get(n);   // Read user input
+
+    stdout.put("Here's your answer: ");
+
+	ForLp1:
+	InitializeForLp1: // I = 0
+	mov( 0, I );
+	mov( 0, J ); 
+	mov(n, dh); // for loop iterates n times 	
+	mov(n, cl); 
+	shl(1, cl); // 2*n 
+	mov(cl,n); 
+	
+	ForLpTerminationTest1: // is I >= n? then terminate for
+	cmp( I, dh );
+	jnl ForLpDone1;
+	ForLpBody1: 
+	mov(n, cl); 
+	mov(J, dl); 
+	sub(dl,cl);  
+	
+	ForLp2:
+	InitializeForLp2:
+	mov(I, AH);
+	ForLpTerminationTest2:
+	cmp(AH, 0);
+	jl ForLpDone2;
+	ForLpBody2:
+	stdout.puti8( cl );
+	//stdout.put( " " );
+
+	ForLpIncrement2:
+	dec(AH);
+	jmp ForLpTerminationTest2;
+	ForLpDone2:
+	
+
+	
+	ForLpIncrement1:
+	inc( I );
+	add(2, J); 
+ 
+	
+	jmp ForLpTerminationTest1;
+	ForLpDone1:
+    
+	
+
+    stdout.newln();
+
+end BigEvenNumbers;

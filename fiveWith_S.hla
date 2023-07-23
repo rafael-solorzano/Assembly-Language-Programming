@@ -1,0 +1,49 @@
+program fiveWith_S;
+
+#include( "stdlib.hhf" );
+ static
+   userInput : int8;
+   
+
+begin fiveWith_S; 
+
+stdout.put("Five with _s", nl); 
+stdout.put("Feed Me: "); 
+stdin.get(userInput); 
+mov(userInput, AH); 
+
+
+// print x
+stdout.put(nl);  
+stdout.puti8(AH); 
+stdout.put("_"); 
+
+// print x - 1
+dec(AH); 
+stdout.puti8(AH);
+stdout.put("_");
+
+
+// print x - (x-1) 
+mov(userInput, AL); 
+sub(AH, AL); 
+stdout.puti8(AL); 
+stdout.put("_"); 
+
+
+// print x + 1
+mov(userInput, AH); 
+inc(AH); 
+stdout.puti8(AH); 
+stdout.put("_"); 
+
+
+// print x - (x-1) + (x + 1) 
+inc(AH); 
+stdout.puti8(AH); 
+stdout.put("_"); 
+
+
+
+
+end fiveWith_S; 

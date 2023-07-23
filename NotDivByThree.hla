@@ -1,0 +1,60 @@
+program notDivByThree;
+
+#include( "stdlib.hhf" );
+ static
+   userInput : int8;
+   I: int8 := 1; // loop counter 
+   
+
+begin notDivByThree; 
+
+stdout.put("Seven not divisible by 3", nl); 
+stdout.put("Feed Me: "); 
+stdin.get(userInput); 
+mov(userInput, AH); 
+mov(userInput, AL);   
+ 
+
+WhileLp:
+WhileLpTermination:
+cmp( I, 7 ); // is I greater than 7? Then exit while loop 
+jg WhileLpDone; // then end loop
+
+WhileLpBody:
+	
+	WhileLpInner: 
+	WhileLpInnerTermination: 
+	cmp(AH, 0); 
+	jle WhileLpInnerDone; 
+	WhileLpInnerBody: 
+	sub(3, AH); 
+	jmp WhileLpInner; 
+	WhileLpInnerDone:
+
+	// For Loop-like statement 
+	IfStatement: 
+	IfCondition: 
+	cmp(AH, 0); 
+	je IfDone; 
+	IfStatementBody: 
+	stdout.puti8(AL);
+	stdout.put(nl); 
+	inc(I);  
+	IfDone: 
+	
+	inc(userInput);
+	mov(userInput, AL); 
+	mov(AL, AH); 
+	
+	
+	
+
+
+
+
+jmp WhileLp;
+WhileLpDone:
+
+
+
+end notDivByThree; 

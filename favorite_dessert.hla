@@ -1,0 +1,16 @@
+
+program favoriteDessert; 
+
+#include( "stdlib.hhf" )
+
+begin favoriteDessert; 
+	stdout.put("CCCC    A    K   K  EEEE");
+	stdout.newln();
+	stdout.put("C      A  A  K  K   E");
+	stdout.newln();
+	stdout.put("C     AAAAA  K K    EEEE");
+	stdout.newln();
+	stdout.put("C     A   A  K K    E");
+	stdout.newln();
+	stdout.put("CCCC  A   A  K   K  EEEE");   
+end favoriteDessert; 

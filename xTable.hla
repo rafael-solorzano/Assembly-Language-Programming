@@ -1,0 +1,130 @@
+
+program xTable; 
+
+#include( "stdlib.hhf" )
+
+static
+inputValue : int32 := 0; // the value to makeup 'X' shape 
+incrementValue : int32 := 0; // storage for incrementation 
+
+begin xTable; 
+
+stdout.put( nl, "Gimme a starting value : " );  //prompt the user
+stdin.get( inputValue );
+
+
+
+// Row 1 
+
+stdout.put(inputValue, " "); // Row 1: Col 1
+
+mov(inputValue, ebx); // R1 : C2 
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " "); 
+
+mov(incrementValue, ebx); // R1: C3 
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+mov(incrementValue, ebx); // R1: C3
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, nl); // R1: C5
+
+
+// Row 2
+mov(incrementValue, ebx); // R2: C1
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, " "); // R2: C2
+
+mov(incrementValue, ebx); // R2: C3
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, " "); // R2: C4
+
+mov(incrementValue, ebx); // R2: C5
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, nl);
+
+
+// Row 3
+mov(incrementValue, ebx); // R3 C1
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+mov(incrementValue, ebx); // R3: C2
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, " "); // R3: C3
+
+mov(incrementValue, ebx); // R3: C4
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+mov(incrementValue, ebx); // R3: C5
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, nl);
+
+
+
+
+// Row 4
+mov(incrementValue, ebx); // R4: C1
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, " "); // R4: C2
+
+mov(incrementValue, ebx); // R4: C3
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, " "); // R4: C4
+
+mov(incrementValue, ebx); // R4: C5
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, nl);
+
+
+
+// Row 5
+stdout.put(inputValue, " "); // Row 5: Col 1
+
+mov(incrementValue, ebx); // R5 : C2 
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " "); 
+
+mov(incrementValue, ebx); // R5: C3 
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+mov(incrementValue, ebx); // R5: C3
+add(1, ebx); 
+mov(ebx, incrementValue); 
+stdout.put(incrementValue, " ");
+
+stdout.put(inputValue, nl); // R5: C5
+ 
+ 
+ 
+end xTable; 

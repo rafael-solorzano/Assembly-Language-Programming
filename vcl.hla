@@ -1,0 +1,15 @@
+/* 
+* Author:     Rafael Solorzano 
+* Course:     CS 17 - Section 1687
+* Date:       25 June, 2023
+* Purpose:    Demonstrate we successfully are using VCL for this course.
+* Input:      None. 
+* Output:     Characters to screen with a simple one-line message. 
+*/ 
+
+
+program usingVCL;
+#include( "stdlib.hhf" );
+begin usingVCL;
+stdout.put( "I am using VCL", nl );
+end usingVCL;

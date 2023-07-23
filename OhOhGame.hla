@@ -1,0 +1,52 @@
+// Note: I could not figure out the logic for this program. 
+// I wanted to submit my WIP, but I will keep trying to solve this! 
+
+
+program OhOhGame;
+#include( "stdlib.hhf" );
+
+static
+    i : int8;            
+    values_with_zero : int8;  
+
+begin OhOhGame;
+
+
+
+    InitializeForLp:           // loop for 2x inputs 
+        mov( 0, i );           // i = 0 
+        mov( 0, values_with_zero );      // values_with_zero = 0
+    ForLp:
+        cmp( i, 5 );          // compare i & 2
+        jnl GameTermination;          // exit if i >= 2
+
+        stdout.put( "Gimme a number: " );
+        stdin.get( AH );      // read input into AH
+
+        InitializeForLp2:    // loop to test one input 
+           
+            mov( 10, BH );    // BH = 10 
+        ForLp2:
+            cmp( AH, 0 );    // compare input & 0
+            jl EndForLp2;     // exit if input is less than 0 (continue game!) 
+            sub( BH, AH );    // input - 10 
+            cmp( AH, 0 );     // compare subtracted input value to zero 
+            je GameTermination;       // exit if subtracted value = 0 (lose game) 
+            jmp ForLp2;
+        EndForLp2:
+
+        inc( values_with_zero );   // increase counter of values that did not end up as zero! 
+        cmp( values_with_zero, 2 );
+        je GameWin;       // if you successfully got 2x winning values, exit to winning phrase!
+
+        inc( i );  // start second iteration of loop 
+        jmp ForLp;
+
+     GameTermination: 
+        stdout.put( "Sorry Charlie! You lose the game!", nl );
+		
+	GameWin: 
+        stdout.put( "You Win The Game!", nl );
+     
+   
+end OhOhGame;
